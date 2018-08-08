@@ -1,0 +1,11 @@
+const Command = require('../../utils/command/commandBuilder.js')
+
+module.exports = new Command({
+    alias : [],
+    desc : '',
+    usage : '',
+    example : '',
+    admin : false,
+    execute : function(params) {
+    }
+})
