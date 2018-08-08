@@ -8,14 +8,18 @@ const command = new CommandClass(bot)
 
 bot.on('ready', () => {
     bot.user.setPresence({game: {name : config.prefix+'help'}})
-    console.log('hey')
+    console.log('online!')
 })
 
 bot.on('message', msg => {
     if(msg.content[0] != config.prefix) return
     if(msg.author.bot) return
     if(msg.channel.type === "dm") return
-    command.execute(msg)
+    try{
+        command.execute(msg)
+    } catch(e) {
+        msg.channel.send('The command broke with the erorr: `'+e+'`')
+    }
 })
 
 bot.login(config.token)

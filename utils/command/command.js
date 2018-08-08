@@ -1,5 +1,5 @@
 const requreDir = require('require-dir')
-const commandFiles = requreDir('../../Commands', {recurse:true})
+const commandFiles = requreDir('../../commands', {recurse:true})
 var commandList = {}
 for(i in commandFiles) {
     commandList[i] = []
@@ -7,7 +7,7 @@ for(i in commandFiles) {
         commandList[i].push(j)
     }
 }
-const CommandBuilder = require('./CommandBuilder.js')
+const commandBuilder = require('./commandBuilder.js')
 
 const {prefix} = require('../../config.json')
 
@@ -17,13 +17,13 @@ var commands = {}
 var aliasToCommand = {}
 const talked = new Set()
 class Command {
-    constructor(bot) {
+    constructor() {
         for(var key in commandFiles) {
-            if(commandFiles[key] instanceof CommandBuilder) {
+            if(commandFiles[key] instanceof commandBuilder) {
                 addCommand(commandFiles[key])
             } else {
                 for(var key2 in commandFiles[key]) {
-                    if(commandFiles[key][key2] instanceof CommandBuilder) {
+                    if(commandFiles[key][key2] instanceof commandBuilder) {
                         addCommand(commandFiles[key][key2])
                     }
                 }
